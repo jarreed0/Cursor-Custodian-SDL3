@@ -196,10 +196,10 @@ void gameLoop()
 			window.render(ground.getTile(i));
 		}
 		window.render(25, 30, arrow);
-		window.render(62, 20, player.getScore(), font32_outline, black);
-		window.render(65, 23, player.getScore(), font32, white);
+		window.render(62, 20, player.getScore().c_str(), font32_outline, black);
+		window.render(65, 23, player.getScore().c_str(), font32, white);
 		window.render(0, 65, highscoreBox);
-		window.render(65, 64, player.getHighscore(), font16, white);
+		window.render(65, 64, player.getHighscore().c_str(), font16, white);
 
 		if (player.isDead() != ALIVE)
 		{
