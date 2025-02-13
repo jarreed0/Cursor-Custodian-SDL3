@@ -66,7 +66,7 @@ void Player::animEyes()
 void Player::update(Ground& ground)
 {
 	timer++;
-	score = timer/50; 
+	score = timer/50;
 	if (score > highscore)
 	{
 		highscore = score;
@@ -93,7 +93,7 @@ void Player::update(Ground& ground)
 		{
 			velocityX = 1/distanceFromCursor() * -100;
 		}
-		else 
+		else
 		{
 			velocityX = 0;
 			if (mouseY > getY() && mouseY < getY() + getHeight())
@@ -117,7 +117,7 @@ void Player::update(Ground& ground)
 			velocityY += GRAVITY;
 			grounded = false;
 		}
-		else 
+		else
 		{
 			if (getY() < SCREEN_HEIGHT - getHeight() - 64 + 20)
 			{
@@ -135,7 +135,6 @@ void Player::update(Ground& ground)
 				dead = HOLE_DEATH;
 			}
 	}
-	
 }
 
 const char* Player::getScore()

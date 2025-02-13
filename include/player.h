@@ -7,9 +7,9 @@
 #include "entity.h"
 #include "ground.h"
 
-
-class Player : public Entity {
-public:	
+class Player : public Entity
+{
+public:
 	Player(float p_x, float p_y, std::vector<SDL_Texture*> p_tex);
 	float distanceFromCursor();
 	bool jump();

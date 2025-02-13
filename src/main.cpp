@@ -30,7 +30,7 @@ const Uint8 *keyState;
 
 RenderWindow window;
 
-std::vector<SDL_Texture*> playerTex; 
+std::vector<SDL_Texture*> playerTex;
 SDL_Texture* groundTex[4];
 SDL_Texture* arrow;
 SDL_Texture* highscoreBox;
@@ -85,7 +85,7 @@ bool init()
 	font32_outline = TTF_OpenFont("res/fonts/cocogoose.ttf", 32);
 	font24 = TTF_OpenFont("res/fonts/cocogoose.ttf", 24);
 	font16 = TTF_OpenFont("res/fonts/cocogoose.ttf", 16);
-	TTF_SetFontOutline(font32_outline, 3); 
+	TTF_SetFontOutline(font32_outline, 3);
 
 	jumpSfx = Mix_LoadWAV("res/sounds/jump.wav");
 	fallSfx = Mix_LoadWAV("res/sounds/fall.wav");
@@ -109,43 +109,44 @@ void reset()
 void gameLoop()
 {
 	SDL_Event event;
- 	while (SDL_PollEvent(&event)) 
+ 	while (SDL_PollEvent(&event))
  	{
-    	switch (event.type) {
-    	case SDL_QUIT: 
-    	{
-      		gameRunning = false;
-      		break;
-    	}
-    	case SDL_MOUSEBUTTONDOWN:
-    	{
-    		if (mainMenu)
-    		{
-    			if (event.button.button == SDL_BUTTON_LEFT && SDL_GetTicks() > 2500)
-    			{
-    				mainMenu = false;
-    				Mix_PlayChannel(-1, clickSfx, 0);
-    			}
-    		}
-    		else 
-    		{
-    			if (event.button.button == SDL_BUTTON_LEFT && player.isDead() == ALIVE)
-    			{
-				if (player.jump())
-						{
+		switch (event.type)
+		{
+		case SDL_QUIT:
+		{
+			gameRunning = false;
+			break;
+		}
+		case SDL_MOUSEBUTTONDOWN:
+		{
+			if (mainMenu)
+			{
+				if (event.button.button == SDL_BUTTON_LEFT && SDL_GetTicks() > 2500)
+				{
+					mainMenu = false;
+					Mix_PlayChannel(-1, clickSfx, 0);
+				}
+			}
+			else
+			{
+				if (event.button.button == SDL_BUTTON_LEFT && player.isDead() == ALIVE)
+				{
+					if (player.jump())
+					{
 						Mix_PlayChannel(-1, jumpSfx, 0);
 					}
-    			} 
-    			else if (player.isDead() != ALIVE)
-    			{
-    				Mix_PlayChannel(-1, clickSfx, 0);
-    				reset();
-    				playedDeathSFX = false;
-    			}
-    		}
-    		break;
-    	}
-    	}
+				}
+				else if (player.isDead() != ALIVE)
+				{
+					Mix_PlayChannel(-1, clickSfx, 0);
+					reset();
+					playedDeathSFX = false;
+				}
+			}
+			break;
+		}
+		}
 	}
 	if (mainMenu)
 	{
@@ -155,13 +156,13 @@ void gameLoop()
 			window.renderCenter(0, sin(SDL_GetTicks()/100) * 2 - 4, "POLYMARS", font24, white);
 			window.display();
 		}
-		else 
+		else
 		{
 			window.clear();
 
 			window.render(SCREEN_WIDTH/2 - 234, SCREEN_HEIGHT/2 - 94 - 30, logo);
 			window.renderCenter(0, 90 + sin(SDL_GetTicks()/100) * 2, "Click to start", font24, white);
-			
+
 			for (int i = 0; i < ground.getLength(); i++)
 			{
 				window.render(ground.getTile(i));
@@ -180,11 +181,12 @@ void gameLoop()
 		{
 			player.update(ground);
 		}
-		else if (!playedDeathSFX) {
+		else if (!playedDeathSFX)
+		{
 			if (player.isDead() == CURSOR_DEATH)
 			{
 				Mix_PlayChannel(-1, hitSfx, 0);
-			} 
+			}
 			else if (player.isDead() == HOLE_DEATH)
 			{
 				Mix_PlayChannel(-1, fallSfx, 0);
@@ -227,10 +229,10 @@ int main(int argc, char* args[])
 	#ifdef __EMSCRIPTEN__
 	emscripten_set_main_loop(gameLoop, 0, 1);
 	#else
-	while (gameRunning) 
+	while (gameRunning)
 	{
-    	gameLoop();
-    	SDL_Delay(16);
+		gameLoop();
+		SDL_Delay(16);
 	}
 	#endif
 

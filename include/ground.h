@@ -4,7 +4,9 @@
 #include <vector>
 
 #include "groundtile.h"
-class Ground {
+
+class Ground
+{
 public:
 	Ground(SDL_Texture* left, SDL_Texture* center, SDL_Texture* right, SDL_Texture* hole);
 	GroundTile& getTile(int p_index);

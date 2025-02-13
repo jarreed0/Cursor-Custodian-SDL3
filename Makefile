@@ -13,19 +13,18 @@ default: objCompile
 	mkdir -p ./make/bin
 	${CC} ./make/build/*.o -o ./make/bin/main ${CFLAGSB}
 	cp -r ./res ./make/bin/res
-
-objCompile: 
+objCompile:
 	mkdir -p ./make/build
 	${CC} ./src/*.cpp ${CFLAGSO}
-	# laymans way to move object files to make/build folder 
+	# laymans way to move object files to make/build folder
 	mv *.o ./make/build
+
 windows: winObjCompile
 	mkdir -p ./make/bin
 	${CC} ./make/build/*.o -o ./make/bin/main ${CFLAGSB} -mwindows
 	cp -r ./res ./make/bin/res
-
-winObjCompile: 
+winObjCompile:
 	mkdir -p ./make/build
 	${CC} ./src/*.cpp ${CFLAGSO} -mwindows
-	# laymans way to move object files to make/build folder 
+	# laymans way to move object files to make/build folder
 	mv *.o ./make/build

@@ -3,7 +3,7 @@
 #include <SDL2/SDL_image.h>
 #include <vector>
 
-class Entity 
+class Entity
 {
 private:
 	float x, y;

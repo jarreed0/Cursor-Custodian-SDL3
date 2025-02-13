@@ -27,7 +27,7 @@ void RenderWindow::create(const char* p_title, int p_w, int p_h)
 
 SDL_Texture* RenderWindow::loadTexture(const char* p_filePath)
 {
-	SDL_Texture* texture = NULL; 
+	SDL_Texture* texture = NULL;
 	texture = IMG_LoadTexture(renderer, p_filePath);
 
 	if (texture == NULL)
@@ -68,7 +68,7 @@ void RenderWindow::render(float p_x, float p_y, SDL_Texture* p_tex)
 	SDL_Rect src;
 	src.x = 0;
 	src.y = 0;
-	SDL_QueryTexture(p_tex, NULL, NULL, &src.w, &src.h); 
+	SDL_QueryTexture(p_tex, NULL, NULL, &src.w, &src.h);
 
 	SDL_Rect dst;
 	dst.x = p_x;
@@ -86,14 +86,14 @@ void RenderWindow::render(SDL_Texture* p_tex)
 
 void RenderWindow::render(float p_x, float p_y, const char* p_text, TTF_Font* font, SDL_Color textColor)
 {
-		SDL_Surface* surfaceMessage = TTF_RenderText_Blended( font, p_text, textColor);
+		SDL_Surface* surfaceMessage = TTF_RenderText_Blended(font, p_text, textColor);
 		SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
 
 		SDL_Rect src;
 		src.x = 0;
 		src.y = 0;
 		src.w = surfaceMessage->w;
-		src.h = surfaceMessage->h; 
+		src.h = surfaceMessage->h;
 
 		SDL_Rect dst;
 		dst.x = p_x;
@@ -107,14 +107,14 @@ void RenderWindow::render(float p_x, float p_y, const char* p_text, TTF_Font* fo
 
 void RenderWindow::renderCenter(float p_x, float p_y, const char* p_text, TTF_Font* font, SDL_Color textColor)
 {
-		SDL_Surface* surfaceMessage = TTF_RenderText_Blended( font, p_text, textColor);
+		SDL_Surface* surfaceMessage = TTF_RenderText_Blended(font, p_text, textColor);
 		SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
 
 		SDL_Rect src;
 		src.x = 0;
 		src.y = 0;
 		src.w = surfaceMessage->w;
-		src.h = surfaceMessage->h; 
+		src.h = surfaceMessage->h;
 
 		SDL_Rect dst;
 		dst.x = SCREEN_WIDTH/2 - src.w/2 + p_x;

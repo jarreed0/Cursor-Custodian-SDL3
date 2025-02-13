@@ -39,7 +39,8 @@ bool Ground::isTileBelow(float x, int width)
 {
 	for (int i = 0; i < getLength(); i++)
 	{
-		switch (getStatus(i)) {
+	switch (getStatus(i))
+	{
 		case 0:
 			if (x + width > groundTiles[i].getX() + 24 && x < groundTiles[i].getX() + 64)
 			{
@@ -58,8 +59,8 @@ bool Ground::isTileBelow(float x, int width)
 				return true;
 			}
 			break;
-		}
-	} 
+	}
+	}
 	return false;
 }
 
@@ -82,14 +83,15 @@ void Ground::update(int score)
 		if (groundTiles[i].getX() + 64 < 0)
 		{
 			groundTiles[i].setX(64 * (getLength() - 1) - 1);
-			switch (lastStatus) {
+			switch (lastStatus)
+			{
 			case 0:
 			{
 				groundTiles[i].setStatus(1, groundTex);
 				lastStatus = 1;
 				holeCount = 0;
 				break;
-			} 
+			}
 			case 1:
 			{
 				int randomInt = rand()%2 + 1;
@@ -97,14 +99,14 @@ void Ground::update(int score)
 				lastStatus = randomInt;
 				holeCount = 0;
 				break;
-			} 
+			}
 			case 2:
 			{
 				groundTiles[i].setStatus(3, groundTex);
 				lastStatus = 3;
 				holeCount = 0;
 				break;
-			} 
+			}
 			case 3:
 			{
 				int randomInt = rand()%2;
@@ -113,7 +115,8 @@ void Ground::update(int score)
 					randomInt = 3;
 					holeCount++;
 				}
-				else {
+				else
+				{
 					holeCount = 0;
 				}
 				if ((holeCount > 4 && score > 99) || (holeCount > 3 && score < 100))
