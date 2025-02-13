@@ -9,7 +9,7 @@ private:
 	float x, y;
 	std::vector<float> animOffsetsX;
 	std::vector<float> animOffsetsY;
-	SDL_Rect currentFrame;
+	SDL_FRect currentFrame;
 	std::vector<SDL_Texture*> tex;
 public:
 	Entity(float p_x, float p_y, std::vector<SDL_Texture*> p_tex);
@@ -27,6 +27,6 @@ public:
 	void setAnimOffsetX(int p_index, int p_value);
 	void setAnimOffsetY(int p_index, int p_value);
 	SDL_Texture* getTex(int p_index);
-	SDL_Rect getCurrentFrame();
+	SDL_FRect getCurrentFrame();
 	void setTex(SDL_Texture* p_tex);
 };

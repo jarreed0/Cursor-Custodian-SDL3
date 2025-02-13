@@ -91,7 +91,7 @@ SDL_Texture* Entity::getTex(int p_index)
 	return tex.at(p_index);
 }
 
-SDL_Rect Entity::getCurrentFrame()
+SDL_FRect Entity::getCurrentFrame()
 {
 	return currentFrame;
 }

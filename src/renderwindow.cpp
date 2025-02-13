@@ -47,13 +47,13 @@ void RenderWindow::render(Entity& p_entity)
 
 	for (int i = p_entity.getSize() - 1; i >= 0; i--)
 	{
-		SDL_Rect src;
+		SDL_FRect src;
 		src.x = p_entity.getCurrentFrame().x;
 		src.y = p_entity.getCurrentFrame().y;
 		src.w = p_entity.getCurrentFrame().w;
 		src.h = p_entity.getCurrentFrame().h;
 
-		SDL_Rect dst;
+		SDL_FRect dst;
 		dst.x = p_entity.getX() + p_entity.getAnimOffsetX(i);
 		dst.y = p_entity.getY() + p_entity.getAnimOffsetY(i);
 		dst.w = p_entity.getCurrentFrame().w;
@@ -65,12 +65,12 @@ void RenderWindow::render(Entity& p_entity)
 
 void RenderWindow::render(float p_x, float p_y, SDL_Texture* p_tex)
 {
-	SDL_Rect src;
+	SDL_FRect src;
 	src.x = 0;
 	src.y = 0;
 	SDL_QueryTexture(p_tex, NULL, NULL, &src.w, &src.h);
 
-	SDL_Rect dst;
+	SDL_FRect dst;
 	dst.x = p_x;
 	dst.y = p_y;
 	dst.w = src.w;
@@ -89,13 +89,13 @@ void RenderWindow::render(float p_x, float p_y, const char* p_text, TTF_Font* fo
 		SDL_Surface* surfaceMessage = TTF_RenderText_Blended(font, p_text, textColor);
 		SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
 
-		SDL_Rect src;
+		SDL_FRect src;
 		src.x = 0;
 		src.y = 0;
 		src.w = surfaceMessage->w;
 		src.h = surfaceMessage->h;
 
-		SDL_Rect dst;
+		SDL_FRect dst;
 		dst.x = p_x;
 		dst.y = p_y;
 		dst.w = src.w;
@@ -110,13 +110,13 @@ void RenderWindow::renderCenter(float p_x, float p_y, const char* p_text, TTF_Fo
 		SDL_Surface* surfaceMessage = TTF_RenderText_Blended(font, p_text, textColor);
 		SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
 
-		SDL_Rect src;
+		SDL_FRect src;
 		src.x = 0;
 		src.y = 0;
 		src.w = surfaceMessage->w;
 		src.h = surfaceMessage->h;
 
-		SDL_Rect dst;
+		SDL_FRect dst;
 		dst.x = SCREEN_WIDTH/2 - src.w/2 + p_x;
 		dst.y = SCREEN_HEIGHT/2 - src.h/2 + p_y;
 		dst.w = src.w;
