@@ -24,12 +24,7 @@ g++ -c src/*.cpp -std=c++14 -O3 -Wall -m64 -I include && mkdir -p bin/release &&
 ```
 The compiled binary ``main`` is located in ``./bin``. For it to run, you must copy the ``./res`` folder to its directory.
 ### Web
-Install [emscripten](https://emscripten.org/docs/getting_started/downloads.html) and execute the following command in the project's root directory:
-```
-emcc src/main.cpp src/entity.cpp src/renderwindow.cpp src/player.cpp src/ground.cpp src/groundtile.cpp -I include -O2 -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s \"SDL2_IMAGE_FORMATS=['png']\" -s USE_SDL_TTF=2 -s USE_SDL_MIXER=2 --preload-file res -o index.html
-```
-The compiled ``.js``, ``.wasm``, ``.data``, and ``.html`` files are located in the project's root.
-
+Emscripten has not been tested with this SDL3 version but hypothetically should be implemented in the SDL3 main callbacks.
 
 ## Contributing
 Pull requests are welcome! For major refactors, please open an issue first to discuss what you would like to improve. Feel free to create a fork of this repository or use the code for any other noncommercial purposes.

@@ -1,9 +1,3 @@
-#ifdef __EMSCRIPTEN__
-#include <emscripten.h>
-#include <emscripten/html5.h>
-#endif
-
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
@@ -226,15 +220,11 @@ void gameLoop()
 
 int main(int argc, char* args[])
 {
-	#ifdef __EMSCRIPTEN__
-	emscripten_set_main_loop(gameLoop, 0, 1);
-	#else
 	while (gameRunning)
 	{
 		gameLoop();
 		SDL_Delay(16);
 	}
-	#endif
 
 	window.cleanUp();
 	TTF_CloseFont(font32);
