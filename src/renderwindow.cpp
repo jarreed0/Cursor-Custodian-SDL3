@@ -68,7 +68,7 @@ void RenderWindow::render(float p_x, float p_y, SDL_Texture* p_tex)
 	SDL_FRect src;
 	src.x = 0;
 	src.y = 0;
-	SDL_QueryTexture(p_tex, NULL, NULL, &src.w, &src.h);
+	SDL_GetTextureSize(p_tex, &src.w, &src.h);
 
 	SDL_FRect dst;
 	dst.x = p_x;

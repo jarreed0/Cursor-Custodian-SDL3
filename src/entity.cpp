@@ -9,7 +9,7 @@ Entity::Entity(float p_x, float p_y, std::vector<SDL_Texture*> p_tex)
 {
 	currentFrame.x = 0;
 	currentFrame.y = 0;
-	SDL_QueryTexture(p_tex.at(0), NULL, NULL, &currentFrame.w, &currentFrame.h);
+	SDL_GetTextureSize(p_tex.at(0), &currentFrame.w, &currentFrame.h);
 	for (int i = 0; i < getSize(); i++)
 	{
 		animOffsetsX.push_back(0);
@@ -23,7 +23,7 @@ Entity::Entity(float p_x, float p_y, SDL_Texture* p_tex)
 	tex.push_back(p_tex);
 	currentFrame.x = 0;
 	currentFrame.y = 0;
-	SDL_QueryTexture(p_tex, NULL, NULL, &currentFrame.w, &currentFrame.h);
+	SDL_GetTextureSize(p_tex, &currentFrame.w, &currentFrame.h);
 	for (int i = 0; i < getSize(); i++)
 	{
 		animOffsetsX.push_back(0);
