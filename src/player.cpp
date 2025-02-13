@@ -24,8 +24,8 @@ Player::Player(float p_x, float p_y, std::vector<SDL_Texture*> p_tex)
 
 float Player::distanceFromCursor()
 {
-	int mouseX = 0;
-	int mouseY = 0;
+	float mouseX = 0;
+	float mouseY = 0;
 	SDL_GetMouseState(&mouseX, &mouseY);
 
 	return sqrt(pow((getX() + getWidth()/2) - mouseX, 2) + pow((getY() + getHeight()/2) - mouseY, 2));
@@ -55,8 +55,8 @@ float Player::clamp(float p_value, float p_min, float p_max)
 
 void Player::animEyes()
 {
-	int mouseX = 0;
-	int mouseY = 0;
+	float mouseX = 0;
+	float mouseY = 0;
 	SDL_GetMouseState(&mouseX, &mouseY);
 
 	setAnimOffsetX(0, clamp(mouseX - getX() - getWidth()/2, -2.5, 2.5));
@@ -73,8 +73,8 @@ void Player::update(Ground& ground)
 	}
 
 	setX(getX() - 1); //autoscroll
-	int mouseX = 0;
-	int mouseY = 0;
+	float mouseX = 0;
+	float mouseY = 0;
 	SDL_GetMouseState(&mouseX, &mouseY);
 
 	animEyes();
