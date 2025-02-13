@@ -5,7 +5,7 @@ INCLUDE = -I ./include
 #compilers flags for compiling object files
 CFLAGSO = -std=c++14 -Wall -m64 -O3 -c ${INCLUDE}
 # libraries
-LIBS = -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+LIBS = -lSDL3 -lSDL3_image -lSDL3_ttf -lSDL3_mixer
 #compilers flags for compiling binary file
 CFLAGSB = -s ${LIBS}
 
