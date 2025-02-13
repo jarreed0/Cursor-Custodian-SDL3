@@ -48,6 +48,8 @@ bool gameRunning = true;
 bool playedDeathSFX = false;
 bool mainMenu = true;
 
+SDL_AudioSpec spec;
+
 bool init()
 {
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
@@ -55,7 +57,11 @@ bool init()
 	TTF_Init();
 
 	window.create("Cursor Custodian", SCREEN_WIDTH, SCREEN_HEIGHT);
-	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+
+	spec.freq = 44100;
+	spec.format = MIX_DEFAULT_FORMAT;
+	spec.channels = 2;
+	Mix_OpenAudio(0, &spec);
 
 	srand((unsigned)time(0));
 
