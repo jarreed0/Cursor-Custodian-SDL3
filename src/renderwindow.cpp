@@ -59,7 +59,7 @@ void RenderWindow::render(Entity& p_entity)
 		dst.w = p_entity.getCurrentFrame().w;
 		dst.h = p_entity.getCurrentFrame().h;
 
-		SDL_RenderCopy(renderer, p_entity.getTex(i), &src, &dst);
+		SDL_RenderTexture(renderer, p_entity.getTex(i), &src, &dst);
 	}
 }
 
@@ -76,7 +76,7 @@ void RenderWindow::render(float p_x, float p_y, SDL_Texture* p_tex)
 	dst.w = src.w;
 	dst.h = src.h;
 
-	SDL_RenderCopy(renderer, p_tex, &src, &dst);
+	SDL_RenderTexture(renderer, p_tex, &src, &dst);
 }
 
 void RenderWindow::render(SDL_Texture* p_tex)
@@ -101,8 +101,8 @@ void RenderWindow::render(float p_x, float p_y, const char* p_text, TTF_Font* fo
 		dst.w = src.w;
 		dst.h = src.h;
 
-		SDL_RenderCopy(renderer, message, &src, &dst);
-		SDL_FreeSurface(surfaceMessage);
+		SDL_RenderTexture(renderer, message, &src, &dst);
+		SDL_DestroySurface(surfaceMessage);
 }
 
 void RenderWindow::renderCenter(float p_x, float p_y, const char* p_text, TTF_Font* font, SDL_Color textColor)
@@ -122,8 +122,8 @@ void RenderWindow::renderCenter(float p_x, float p_y, const char* p_text, TTF_Fo
 		dst.w = src.w;
 		dst.h = src.h;
 
-		SDL_RenderCopy(renderer, message, &src, &dst);
-		SDL_FreeSurface(surfaceMessage);
+		SDL_RenderTexture(renderer, message, &src, &dst);
+		SDL_DestroySurface(surfaceMessage);
 }
 
 void RenderWindow::display()

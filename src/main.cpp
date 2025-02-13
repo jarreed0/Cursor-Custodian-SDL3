@@ -107,12 +107,12 @@ void gameLoop()
  	{
 		switch (event.type)
 		{
-		case SDL_QUIT:
+		case SDL_EVENT_QUIT:
 		{
 			gameRunning = false;
 			break;
 		}
-		case SDL_MOUSEBUTTONDOWN:
+		case SDL_EVENT_MOUSE_BUTTON_DOWN:
 		{
 			if (mainMenu)
 			{
