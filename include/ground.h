@@ -8,6 +8,7 @@
 class Ground
 {
 public:
+	Ground() {}
 	Ground(SDL_Texture* left, SDL_Texture* center, SDL_Texture* right, SDL_Texture* hole);
 	GroundTile& getTile(int p_index);
 	int getStatus(int p_index);

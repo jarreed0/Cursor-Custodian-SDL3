@@ -10,6 +10,7 @@
 class Player : public Entity
 {
 public:
+	Player() {}
 	Player(float p_x, float p_y, std::vector<SDL_Texture*> p_tex);
 	float distanceFromCursor();
 	bool jump();

@@ -50,6 +50,9 @@ bool mainMenu = true;
 
 SDL_AudioSpec spec;
 
+Player player = Player();
+Ground ground = Ground();
+
 bool init()
 {
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
@@ -93,13 +96,13 @@ bool init()
 	clickSfx = Mix_LoadWAV("res/sounds/click.wav");
 	Mix_PlayChannel(-1, jumpSfx, 0);
 
+	player = Player(0, 0, playerTex);
+	ground = Ground(groundTex[0], groundTex[1], groundTex[2], groundTex[3]);
+
 	return true;
 }
 
 bool load = init();
-
-Player player(0, 0, playerTex);
-Ground ground(groundTex[0], groundTex[1], groundTex[2], groundTex[3]);
 
 void reset()
 {

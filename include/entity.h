@@ -12,6 +12,7 @@ private:
 	SDL_FRect currentFrame;
 	std::vector<SDL_Texture*> tex;
 public:
+	Entity() {}
 	Entity(float p_x, float p_y, std::vector<SDL_Texture*> p_tex);
 	Entity(float p_x, float p_y, SDL_Texture* p_tex);
 	void init();
