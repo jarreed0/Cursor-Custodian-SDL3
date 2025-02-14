@@ -1,4 +1,7 @@
+#define SDL_MAIN_USE_CALLBACKS 1
+
 #include <SDL3/SDL.h>
+#include <SDL3/SDL_main.h>
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <SDL3_mixer/SDL_mixer.h>
@@ -44,7 +47,6 @@ Mix_Chunk* fallSfx;
 Mix_Chunk* hitSfx;
 Mix_Chunk* clickSfx;
 
-bool gameRunning = true;
 bool playedDeathSFX = false;
 bool mainMenu = true;
 
@@ -53,10 +55,12 @@ SDL_AudioSpec spec;
 Player player = Player();
 Ground ground = Ground();
 
-bool init()
+SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
-	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-
+	if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
+		SDL_Log("Couldn't initialize SDL: %s", SDL_GetError());
+		return SDL_APP_FAILURE;
+	}
 	TTF_Init();
 
 	window.create("Cursor Custodian", SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -99,58 +103,18 @@ bool init()
 	player = Player(0, 0, playerTex);
 	ground = Ground(groundTex[0], groundTex[1], groundTex[2], groundTex[3]);
 
-	return true;
+	return SDL_APP_CONTINUE;
 }
 
-bool load = init();
 
 void reset()
 {
 	player.reset();
 	ground.reset();
 }
-void gameLoop()
+
+SDL_AppResult SDL_AppIterate(void *appstate)
 {
-	SDL_Event event;
- 	while (SDL_PollEvent(&event))
- 	{
-		switch (event.type)
-		{
-		case SDL_EVENT_QUIT:
-		{
-			gameRunning = false;
-			break;
-		}
-		case SDL_EVENT_MOUSE_BUTTON_DOWN:
-		{
-			if (mainMenu)
-			{
-				if (event.button.button == SDL_BUTTON_LEFT && SDL_GetTicks() > 2500)
-				{
-					mainMenu = false;
-					Mix_PlayChannel(-1, clickSfx, 0);
-				}
-			}
-			else
-			{
-				if (event.button.button == SDL_BUTTON_LEFT && player.isDead() == ALIVE)
-				{
-					if (player.jump())
-					{
-						Mix_PlayChannel(-1, jumpSfx, 0);
-					}
-				}
-				else if (player.isDead() != ALIVE)
-				{
-					Mix_PlayChannel(-1, clickSfx, 0);
-					reset();
-					playedDeathSFX = false;
-				}
-			}
-			break;
-		}
-		}
-	}
 	if (mainMenu)
 	{
 		if (SDL_GetTicks() < 2500)
@@ -225,23 +189,64 @@ void gameLoop()
 		}
 		window.display();
 	}
+    	SDL_Delay(16);
+	return SDL_APP_CONTINUE;
 }
 
-int main(int argc, char* args[])
+SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 {
-	while (gameRunning)
+    if (event->type == SDL_EVENT_QUIT) {
+        return SDL_APP_SUCCESS;
+    }
+	switch (event->type)
 	{
-		gameLoop();
-		SDL_Delay(16);
+	case SDL_EVENT_QUIT:
+		return SDL_APP_SUCCESS;
+	case SDL_EVENT_KEY_DOWN:
+		switch (event->key.scancode)
+		{
+			case SDL_SCANCODE_ESCAPE:
+			case SDL_SCANCODE_Q:
+				return SDL_APP_SUCCESS;
+			default:
+				break;
+		}
+    	case SDL_EVENT_MOUSE_BUTTON_DOWN:
+    		if (mainMenu)
+    		{
+    			if (event->button.button == SDL_BUTTON_LEFT && SDL_GetTicks() > 2500)
+    			{
+    				mainMenu = false;
+    				Mix_PlayChannel(-1, clickSfx, 0);
+    			}
+    		}
+    		else
+    		{
+    			if (event->button.button == SDL_BUTTON_LEFT && player.isDead() == ALIVE)
+    			{
+				if (player.jump())
+						{
+						Mix_PlayChannel(-1, jumpSfx, 0);
+					}
+    			}
+    			else if (player.isDead() != ALIVE)
+    			{
+    				Mix_PlayChannel(-1, clickSfx, 0);
+    				reset();
+    				playedDeathSFX = false;
+    			}
+    		}
+		break;
 	}
+	return SDL_APP_CONTINUE;
+}
 
-	window.cleanUp();
-	TTF_CloseFont(font32);
-	TTF_CloseFont(font32_outline);
-	TTF_CloseFont(font24);
-	TTF_CloseFont(font16);
-	TTF_Quit();
-	SDL_Quit();
-
-	return 0;
+void SDL_AppQuit(void *appstate, SDL_AppResult result)
+{
+		window.cleanUp();
+		TTF_CloseFont(font32);
+		TTF_CloseFont(font32_outline);
+		TTF_CloseFont(font24);
+		TTF_CloseFont(font16);
+		TTF_Quit();
 }
