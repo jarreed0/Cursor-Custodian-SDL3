@@ -1,4 +1,4 @@
-# Cursor Custodian
+# [Cursor Custodian](https://github.com/PolyMarsDev/Cursor-Custodian)
 
 Cursor Custodian is a game created in 48 hours for the [2020 GMTK Game Jam](https://itch.io/jam/gmtk-2020) using C++ and [SDL](https://www.libsdl.org/). It can be played in your web browser [here](https://polymars.itch.io/cursor-custodian).
 ## Screenshots
@@ -29,4 +29,4 @@ Emscripten has not been tested with this SDL3 version but hypothetically should 
 ## Contributing
 Pull requests are welcome! For major refactors, please open an issue first to discuss what you would like to improve. Feel free to create a fork of this repository or use the code for any other noncommercial purposes.
 
-Originally created in SDL2. It now using SDL3.
+[Originally created in SDL2 by PolyMars](https://github.com/PolyMarsDev/Cursor-Custodian). It now using SDL3.
